@@ -18,22 +18,12 @@
   </div>
 
   <h1 class="orbitron-title">🛸 Your Mad Lib Result!</h1>
-  <div id="story" style="max-width: 700px; margin: auto; font-size: 1.2rem;"></div>
+
+  <!-- 🚀 This is where the server will inject the story -->
+  <div id="story" style="max-width: 700px; margin: auto; font-size: 1.2rem;">
+    {{madlib}}
+  </div>
 
   <p style="text-align:center;"><a href="index.html">🔁 Re-Launch</a></p>
-
-  <script>
-    const data = JSON.parse(localStorage.getItem('madLibData'));
-    if (data) {
-      const storyHTML = `
-        <p>Captain <strong>${data.name}</strong> of the SS Brayne soared through the <strong>${data.adjective}</strong> galaxy in pursuit of <strong>${data.pluralNoun}</strong>.</p>
-        <p>Fueled by <strong>${data.food}</strong> and questionable choices, he left a trail of gas so powerful that his parents nicknamed him "<strong>${data.nickname}</strong>".</p>
-        <p>His mission? To boldly <strong>${data.verb}</strong> where no Brayne has before!</p>
-      `;
-      document.getElementById('story').innerHTML = storyHTML;
-    } else {
-      document.getElementById('story').innerHTML = `<p>Oops! No story found. Please go back and fill out the form.</p>`;
-    }
-  </script>
 </body>
 </html>

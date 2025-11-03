@@ -1,6 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
 const path = require('path');
+const fs = require('fs'); // Needed to read HTML template
 const server = express();
 
 // Middleware
@@ -16,7 +17,7 @@ server.get('/do_a_random', (req, res) => {
   res.send(`Your number is: ${Math.floor(Math.random() * 100) + 1}`);
 });
 
-// POST route for Mad Lib from Lab_7 form
+// ✅ New POST route for Mad Lib from Lab_7 form using result.html template
 server.post('/Lab_7/index.html', (req, res) => {
   const { name, adjective, pluralNoun, food, nickname, verb, thing, weirdAction } = req.body;
 
@@ -29,27 +30,33 @@ server.post('/Lab_7/index.html', (req, res) => {
     `);
   }
 
-  // Captain SmartGuy story — Mad Lib style!
+  // Build the Mad Lib story
   const madLib = `
     <p>Captain <strong>${name}</strong> of the SS Brayne soared through the <strong>${adjective}</strong> galaxy in pursuit of <strong>${pluralNoun}</strong>.</p>
     <p>Fueled by <strong>${food}</strong> and questionable choices, he left a trail of gas so powerful that his parents nicknamed him "<strong>${nickname}</strong>".</p>
-    <p>His mission? To boldly <strong>${verb}</strong> where no <strong>${thing}</strong> has <strong>${weirdAction}</strong> before!</p>
+    <p>His mission? To boldly <strong>${verb}</strong> where no <strong>${thing || 'Brayne'}</strong> has <strong>${weirdAction || 'ventured'}</strong> before!</p>
   `;
 
-  res.send(`
-    <h1>🛸 Your Mad Lib Result!</h1>
-    ${madLib}
-    <a href="/Lab_7/index.html">Re-Enter the Brayne</a>
-  `);
-});
+  const resultPath = path.join(__dirname, 'Public', 'Lab_7', 'result.html');
 
-// ✅ Use PORT provided by Render, or 8080 locally
-const PORT = process.env.PORT || 8080;
+  // Read the HTML template and inject the madlib story
+  fs.readFile(resultPath, 'utf8', (err, htmlData) => {
+    if (err) {
+      return res.status(500).send('Error loading result page template.');
+    }
+
+    const finalPage = htmlData.replace('{{madlib}}', madLib);
+    res.send(finalPage);
+  });
+});
 
 // ✅ Route to serve the home page
 server.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'Public', 'Lab_7', 'index.html'));
 });
+
+// ✅ Use PORT provided by Render, or 8080 locally
+const PORT = process.env.PORT || 8080;
 
 server.listen(PORT, () => {
   console.log(`🚀 Server ready on port ${PORT}`);
