@@ -45,6 +45,10 @@ server.post('/Lab_7/index.html', (req, res) => {
 
 // ✅ Use PORT provided by Render, or 8080 locally
 const PORT = process.env.PORT || 8080;
+//Route to serve the home page
+server.get('/', (req, res) => {
+    res,sendFile(path.join(__dirname, 'Public', 'Lab_7', 'index.html'))
+})
 
 server.listen(PORT, () => {
   console.log(`🚀 Server ready on port ${PORT}`);
