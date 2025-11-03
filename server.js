@@ -43,9 +43,9 @@ server.post('/Lab_7/index.html', (req, res) => {
   `);
 });
 
-// Use port provided by Render, or 8080 locally
+// ✅ Use PORT provided by Render, or 8080 locally
 const PORT = process.env.PORT || 8080;
 
-server.listen(PORT, () =>{
-    console.log('🚀 Server ready on port ${PORT}');
-})
+server.listen(PORT, () => {
+  console.log(`🚀 Server ready on port ${PORT}`);
+});
