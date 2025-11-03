@@ -1,4 +1,11 @@
 {
+  "name": "ITC_505_Projects_Nodejs",
+  "version": "1.0.0",
+  "description": "Mad Lib Lab 7 with Node and Express",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "express": "^5.1.0",
     "morgan": "^1.10.1"
