@@ -21,6 +21,7 @@ server.get('/do_a_random', (req, res) => {
 server.post('/Lab_7/index.html', (req, res) => {
   const { name, adjective, pluralNoun, food, nickname, verb, thing, weirdAction } = req.body;
 
+
   // Basic form validation
   if (!name || !adjective || !pluralNoun || !food || !nickname || !verb) {
     return res.send(`
