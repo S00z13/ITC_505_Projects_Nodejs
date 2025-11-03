@@ -43,12 +43,9 @@ server.post('/Lab_7/index.html', (req, res) => {
   `);
 });
 
-// Use port 8080 for local testing
-let port = 80;
-if (process.argv[2] === 'local') {
-  port = 8080;
-}
+// Use port provided by Render, or 8080 locally
+const PORT = process.env.PORT || 8080;
 
-server.listen(port, () => {
-  console.log(`🚀 Ready on http://localhost:${port}`);
-});
+server.listen(PORT, () =>{
+    console.log('🚀 Server ready on port ${PORT}');
+})
