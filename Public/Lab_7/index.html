@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Captain SmartGuy's Galactic Mad Lib</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Stars background -->
+  <div class="stars">
+    <div class="star" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+    <div class="star" style="top: 40%; left: 70%; animation-delay: 1s;"></div>
+    <div class="star" style="top: 25%; left: 50%; animation-delay: 2s;"></div>
+    <div class="star" style="top: 80%; left: 30%; animation-delay: 3s;"></div>
+    <div class="star" style="top: 60%; left: 10%; animation-delay: 4s;"></div>
+  </div>
+
+  <h1 class="orbitron-title">🛸 Captain SmartGuy's Galactic Mad Lib 🚀</h1>
+  <p class="intro">Fill in the blanks and discover your hilarious space adventure aboard the SS Brayne!</p>
+
+  <form id="madLibForm">
+    <label for="name">Captain's Name:</label>
+    <input type="text" name="name" id="name" required>
+
+    <label for="adjective">Adjective (to describe the galaxy):</label>
+    <input type="text" name="adjective" id="adjective" required>
+
+    <label for="pluralNoun">Plural Noun (something to chase):</label>
+    <input type="text" name="pluralNoun" id="pluralNoun" required>
+
+    <label for="food">Favorite Food:</label>
+    <input type="text" name="food" id="food" required>
+
+    <label for="nickname">Funny Nickname:</label>
+    <input type="text" name="nickname" id="nickname" required>
+
+    <label for="verb">Verb (action word):</label>
+    <input type="text" name="verb" id="verb" required>
+
+    <button type="submit">💫 Tell My Story!</button>
+  </form>
+
+  <footer>
+    <p>Last updated: <span id="lastModified"></span></p>
+  </footer>
+
+  <script>
+    document.getElementById('madLibForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const adjective = document.getElementById('adjective').value;
+      const pluralNoun = document.getElementById('pluralNoun').value;
+      const food = document.getElementById('food').value;
+      const nickname = document.getElementById('nickname').value;
+      const verb = document.getElementById('verb').value;
+
+      // Save inputs to localStorage
+      localStorage.setItem('madLibData', JSON.stringify({
+        name, adjective, pluralNoun, food, nickname, verb
+      }));
+
+      // Redirect to result page
+      window.location.href = './result.html';
+    });
+
+    document.getElementById('lastModified').textContent = document.lastModified;
+  </script>
+  <footer class="credits">
+  <p>
+    🚀 Mad Lib created as part of ITC 505 Lab 7 | Design customized with 💫 space-inspired elements.
+    <br>
+    Background image: <em>Hubble Ultra-Deep Field</em> courtesy of 
+    <a href="https://science.nasa.gov/mission/hubble/science/science-highlights/exploring-the-birth-of-stars/" target="_blank" rel="noopener noreferrer">
+      NASA / ESA
+    </a>
+  </p>
+</footer>
+</body>
+</html>

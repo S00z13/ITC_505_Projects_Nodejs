@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Mad Lib Result</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Stars background -->
+  <div class="stars">
+    <div class="star" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+    <div class="star" style="top: 40%; left: 70%; animation-delay: 1s;"></div>
+    <div class="star" style="top: 25%; left: 50%; animation-delay: 2s;"></div>
+    <div class="star" style="top: 80%; left: 30%; animation-delay: 3s;"></div>
+    <div class="star" style="top: 60%; left: 10%; animation-delay: 4s;"></div>
+  </div>
+
+  <h1 class="orbitron-title">🛸 Your Mad Lib Result!</h1>
+  <div id="story" style="max-width: 700px; margin: auto; font-size: 1.2rem;"></div>
+
+  <p style="text-align:center;"><a href="index.html">🔁 Re-Launch</a></p>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem('madLibData'));
+    if (data) {
+      const storyHTML = `
+        <p>Captain <strong>${data.name}</strong> of the SS Brayne soared through the <strong>${data.adjective}</strong> galaxy in pursuit of <strong>${data.pluralNoun}</strong>.</p>
+        <p>Fueled by <strong>${data.food}</strong> and questionable choices, he left a trail of gas so powerful that his parents nicknamed him "<strong>${data.nickname}</strong>".</p>
+        <p>His mission? To boldly <strong>${data.verb}</strong> where no Brayne has before!</p>
+      `;
+      document.getElementById('story').innerHTML = storyHTML;
+    } else {
+      document.getElementById('story').innerHTML = `<p>Oops! No story found. Please go back and fill out the form.</p>`;
+    }
+  </script>
+</body>
+</html>
